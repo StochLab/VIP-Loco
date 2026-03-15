@@ -4,8 +4,7 @@
 
 ### Installation
 
-This repository is a modified version of [WMP-Loco](https://wmp-loco.github.io/), modifications roughly include our method, **Warp** backend for depth processing, **JAX** for planning, and additional robot platforms.
-
+This repository is a modified version of [WMP-Loco](https://wmp-loco.github.io/). Modifications roughly include our method, the **Warp** backend for fast depth processing, **JAX** for planning, and additional robot platforms.
 
 #### Prerequisites
 
@@ -38,7 +37,7 @@ pip install -r requirements.txt
 
 #### 4. Install IsaacGym
 
-Download [IsaacGym Preview 4](https://developer.nvidia.com/isaac-gym) and install it manually inside the conda env:
+Download [IsaacGym Preview 4](https://developer.nvidia.com/isaac-gym) and install it manually inside the conda environment:
 
 ```bash
 cd <isaacgym_path>/python
@@ -75,7 +74,8 @@ Supported terrains: `slope`, `stair`, `gap`, `climb`, `crawl`, `tilt`
 
 ### Issues
 
-The code is not in a release version, hence if you face any issues in installation or running the scripts, please feel free to create an issue :)
+- The code is not in a release version. If you face any issues during installation or while running the scripts, please feel free to create an issue :)
+- When this project was in development, there was no reliable or robust way to make PyTorch models run inside `jax.jit`. As a result, a `torch2jax` file was taken from [torch2jax](https://github.com/samuela/torch2jax) and modified according to our needs. However, there is now a better library called [torchax](https://github.com/google/torchax), which is a more robust and faster method. Please migrate to it if necessary.
 
 ---
 
