@@ -1,0 +1,60 @@
+# Dreamer config
+defaults:
+
+  device: 'cuda:0'
+  compile: True
+  precision: 32
+  debug: False
+  video_pred_log: false
+
+  # Environment
+  task_cfg: 
+    {
+      go1_amp: {num_actions: 12, num_joint_pos: 12, num_joint_vel: 12, wheel: False},
+      cassie: {num_actions: 12, num_joint_pos: 12, num_joint_vel: 12, wheel: False},
+      trona1_w: {num_actions: 8, num_joint_pos: 6, num_joint_vel: 8, wheel: True},
+    }
+
+  horizon: 5
+
+  # Model
+  dyn_hidden: 512
+  dyn_deter: 512
+  dyn_stoch: 32
+  dyn_discrete: 32
+  dyn_rec_depth: 1
+  dyn_mean_act: 'none'
+  dyn_std_act: 'sigmoid2'
+  dyn_min_std: 0.1
+  grad_heads: ['decoder', 'reward', 'value']
+  units: 512 # = other heads except decoder, e.g., reward
+  act: 'SiLU'
+  norm: True
+  encoder:
+    {mlp_keys: '.*', cnn_keys: 'image', act: 'SiLU', norm: True, cnn_depth: 16, kernel_size: 4, minres: 4, mlp_layers: 2, mlp_units: 512, symlog_inputs: True}
+  decoder:
+    {mlp_keys: '.*', cnn_keys: 'image', act: 'SiLU', norm: True, cnn_depth: 16, kernel_size: 4, minres: 4, mlp_layers: 2, mlp_units: 512, cnn_sigmoid: False, image_dist: mse, vector_dist: symlog_mse, outscale: 1.0}
+  actor_head:
+    {layers: 2, dist: 'normal', std: 'learned', min_std: 0.1, max_std: 1.0, outscale: 1.0, loss_scale: 0.2}
+  value_head:
+    {layers: 2, dist: 'normal', std: 'learned', min_std: 0.1, max_std: 1.0, outscale: 1.0, loss_scale: 0.2}
+  reward_head:
+    {layers: 2, dist: 'normal', std: 'learned', min_std: 0.1, max_std: 1.0, outscale: 1.0, loss_scale: 0.2}
+  dyn_scale: 0.5
+  rep_scale: 0.1
+  kl_free: 1.0
+  weight_decay: 0.0
+  unimix_ratio: 0.01
+  initial: 'learned'
+
+  # Training
+  train_steps_per_iter: 10
+  train_start_steps: 10000
+  batch_size: 16
+  max_traj_length: 64
+  train_ratio: 512
+  pretrain: 100
+  model_lr: 1e-4
+  opt_eps: 1e-8
+  grad_clip: 1000
+  opt: 'adam'
