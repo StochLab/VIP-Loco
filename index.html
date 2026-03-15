@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="description" content="VIP-Loco: A Visually Guided Infinite Horizon Planning Framework for Legged Locomotion">
+  <meta name="keywords" content="VIP-Loco, Planning, Legged Robots, Reinforcement Learning, MPC, Vision">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>VIP-Loco</title>
+
+  <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.4/css/bulma.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1/css/academicons.min.css">
+
+  <style>
+    body { font-family: 'Noto Sans', sans-serif; }
+    .publication-title { font-family: 'Google Sans', sans-serif; }
+    .publication-authors { font-family: 'Google Sans', sans-serif; }
+    .publication-authors a { color: #3273dc; }
+    .publication-authors a:hover { text-decoration: underline; }
+    .author-block { display: inline-block; }
+
+    pre {
+      background: #f5f5f5;
+      padding: 1.25em 1.5em;
+      border-radius: 6px;
+      font-size: 0.85em;
+      overflow-x: auto;
+    }
+
+    .fig-caption {
+      font-size: 0.88em;
+      color: #555;
+      margin-top: 0.75em;
+      text-align: center;
+    }
+
+    table.results-table th {
+      background: #f5f5f5;
+      text-align: center;
+      font-size: 0.85em;
+    }
+    table.results-table td {
+      text-align: center;
+      vertical-align: middle;
+      font-size: 0.85em;
+    }
+    table.results-table td.robot-cell {
+      font-weight: 600;
+      text-align: left;
+    }
+    table.results-table td.vip-row {
+      color: #3273dc;
+      font-weight: 600;
+    }
+
+    .video-placeholder {
+      background: #f0f0f0;
+      border: 2px dashed #ccc;
+      border-radius: 8px;
+      aspect-ratio: 16/9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #999;
+      font-size: 0.95em;
+    }
+
+    .img-placeholder {
+      background: #f0f0f0;
+      border: 1px dashed #ccc;
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #aaa;
+      font-size: 0.85em;
+      width: 100%;
+      min-height: 220px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── TITLE ── -->
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered">
+        <div class="column has-text-centered">
+
+          <h1 class="title is-2 publication-title">
+            VIP-Loco: A Visually Guided Infinite Horizon Planning Framework for Legged Locomotion
+          </h1>
+
+          <div class="is-size-5 publication-authors">
+            <span class="author-block">Anonymous Authors</span>
+          </div>
+
+          <div class="is-size-6 publication-authors" style="margin-top:0.4em; color:#888;">
+            <span>Under Review · 2025</span>
+          </div>
+
+          <div class="column has-text-centered" style="margin-top:1em;">
+            <div class="publication-links">
+
+              <span class="link-block">
+                <a href="#" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="ai ai-arxiv"></i></span>
+                  <span>arXiv</span>
+                </a>
+              </span>
+
+              <span class="link-block">
+                <a href="#" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fas fa-file-pdf"></i></span>
+                  <span>Paper</span>
+                </a>
+              </span>
+
+              <span class="link-block">
+                <a href="#" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fab fa-youtube"></i></span>
+                  <span>Video</span>
+                </a>
+              </span>
+
+              <span class="link-block">
+                <a href="#" class="external-link button is-normal is-rounded is-dark">
+                  <span class="icon"><i class="fab fa-github"></i></span>
+                  <span>Code</span>
+                </a>
+              </span>
+
+            </div>
+          </div>
+
+          <!-- Teaser — replace with your GIFs -->
+          <div class="columns is-centered" style="margin-top:1.5em;">
+            <div class="column">
+              <div class="img-placeholder" style="min-height:180px;">
+                Replace with teaser GIFs: Go1 · Cassie · TronA1-W
+              </div>
+              <p class="fig-caption">
+                VIP-Loco evaluated across three morphologies: Unitree Go1 (quadruped), Cassie (biped), TronA1-W (wheeled biped).
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── ABSTRACT ── -->
+<section class="hero is-light">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column">
+          <h2 class="title is-3">Abstract</h2>
+          <div class="content has-text-justified">
+            <p>
+              Perceptive locomotion for legged robots requires anticipating and adapting to complex, dynamic
+              environments. Model Predictive Control (MPC) provides interpretable motion planning with constraint
+              enforcement, but struggles with high-dimensional perceptual inputs and rapidly changing terrain.
+              In contrast, model-free Reinforcement Learning (RL) adapts well across visually challenging
+              scenarios but lacks planning.
+            </p>
+            <p>
+              To bridge this gap, we propose <strong>VIP-Loco</strong>, a framework that integrates vision-based
+              scene understanding with RL and planning. During training, an internal model maps proprioceptive
+              states and depth images into compact kinodynamic features used by the RL policy. At deployment,
+              the learned models are used within an infinite-horizon MPC formulation, combining adaptability
+              with structured planning.
+            </p>
+            <p>
+              We validate VIP-Loco in simulation on challenging locomotion tasks — including slopes, stairs,
+              crawling, tilting, gap jumping, and climbing — across three robot morphologies: a quadruped
+              (Unitree Go1), a biped (Cassie), and a wheeled-biped (TronA1-W). Through ablations and comparisons
+              with state-of-the-art methods, we show that VIP-Loco unifies planning and perception, enabling
+              robust, interpretable locomotion in diverse environments.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── VIDEO ── -->
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <div class="columns is-centered has-text-centered">
+        <div class="column">
+          <h2 class="title is-3">Video</h2>
+          <!-- Replace with: -->
+          <!-- <iframe width="100%" style="aspect-ratio:16/9" src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0" allowfullscreen></iframe> -->
+          <div class="video-placeholder">
+            Video coming soon — replace with YouTube embed
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ── FRAMEWORK ── -->
+<section class="hero is-light">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+
+      <div class="columns is-centered has-text-centered">
+        <div class="column" style="padding-bottom:2%">
+          <h2 class="title is-3">Training Architecture</h2>
+        </div>
+      </div>
+
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <!-- Replace src with your Fig. 2 -->
+          <div class="img-placeholder" style="min-height:300px;">
+            Replace with framework figure (Fig. 2)
+          </div>
+          <p class="fig-caption">
+            <strong>VIP-Loco training framework.</strong>
+            The internal model (GRU + CNN-MLP depth encoder + variational latent state) is trained via
+            supervised learning alongside an asymmetric actor-critic (PPO). The Expert Actor receives
+            imagined kinodynamic rollouts and the GRU hidden state via stop-gradient.
+          </p>
+        </div>
+      </div>
+
+      <div class="columns is-centered" style="margin-top:1.5em;">
+        <div class="column is-four-fifths">
+          <div class="content has-text-justified">
+            <p>
+              The internal model serves a dual role. During <em>training</em>, it provides the expert actor
+              with imagined kinodynamic rollouts that encode future terrain geometry, enabling anticipatory
+              behavior without privileged simulator access. During <em>deployment</em>, it acts as the dynamics
+              and reward oracle for the MPC planner (Algorithm 2), enabling constraint-aware trajectory
+              optimization in a compact learned state space.
+            </p>
+            <p>
+              The GRU operates at 10 Hz — rather than the actor's 50 Hz — due to the computational cost of
+              depth-image encoding and latent-state estimation. The recurrent hidden state is held fixed between
+              GRU updates and reused by the actor at the higher control frequency.
+            </p>
+            <p>
+              We adopt a <strong>variational</strong> latent objective rather than a consistency-based one
+              (as in TD-MPC). The privileged critic's scan-dot inputs capture height information for open terrains
+              but cannot represent lateral geometry constraints such as wall clearances. The variational objective
+              instead regularizes the encoder toward the learned dynamics prior, producing representations better
+              suited to visually demanding tasks such as crawl and tilt.
+            </p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ── DEPLOYMENT ── -->
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+
+      <div class="columns is-centered has-text-centered">
+        <div class="column" style="padding-bottom:2%">
+          <h2 class="title is-3">Deployment: Infinite-Horizon MPC</h2>
+        </div>
+      </div>
+
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-four-fifths">
+          <!-- Replace with your algorithm figures -->
+          <div class="img-placeholder" style="min-height:260px;">
+            Replace with Algorithm 1 + Algorithm 2 figure
+          </div>
+          <p class="fig-caption">
+            <em>Left (Alg. 1):</em> Imagination Augmentation rolls out future kinodynamic CoM states in
+            latent space using the internal model.
+            <em>Right (Alg. 2):</em> Data-driven ∞-horizon MPC (MPPI) optimizes action trajectories at
+            deployment using the RL policy as a warm-start, with value bootstrapping for infinite-horizon return.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ── RESULTS ── -->
+<section class="hero is-light">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+
+      <div class="columns is-centered has-text-centered">
+        <div class="column" style="padding-bottom:2%">
+          <h2 class="title is-3">Results</h2>
+        </div>
+      </div>
+
+      <!-- Per-terrain comparison -->
+      <div class="columns is-centered">
+        <div class="column is-four-fifths">
+          <h3 class="title is-5">Deployment Performance Comparison (Go1)</h3>
+          <div class="content has-text-justified">
+            <p>
+              We compare five methods across terrain types of increasing difficulty (0 = easiest, 8 = hardest).
+              HIM-Loco and PIP-Loco represent [RL + MPC] without vision; WMP represents [RL + Vision] without
+              planning; VIP-Loco (Variational) is our full method.
+            </p>
+          </div>
+          <!-- Replace with your Fig. 4 -->
+          <div class="img-placeholder" style="min-height:280px;">
+            Replace with deployment comparison figure (Fig. 4)
+          </div>
+          <p class="fig-caption">
+            Success rate (top) and average return (bottom) across five terrain types for the Go1 quadruped,
+            over 5 seeds. VIP-Loco (Variational) maintains &gt;90% success on stairs at maximum difficulty
+            and sustains &gt;60% on crawl and tilt where proprioceptive-only methods fail entirely.
+          </p>
+        </div>
+      </div>
+
+      <!-- Quantitative table -->
+      <div class="columns is-centered" style="margin-top:2.5em;">
+        <div class="column is-four-fifths">
+          <h3 class="title is-5">Quantitative Comparison — Three Morphologies</h3>
+          <div class="content has-text-justified">
+            <p>
+              Average episodic return after 5k iterations (5 seeds). Planning gains are concentrated at
+              high difficulty levels (5–8) where baseline methods saturate or fail. TronA1-W shows the
+              largest and most consistent gains (+2.33 avg. return) due to additional non-holonomic constraints.
+            </p>
+          </div>
+
+          <div class="table-container">
+            <table class="table is-bordered is-striped is-hoverable is-fullwidth results-table">
+              <thead>
+                <tr>
+                  <th>Robot</th>
+                  <th>Method</th>
+                  <th>Slopes</th>
+                  <th>Stairs</th>
+                  <th>Climb</th>
+                  <th>Gaps</th>
+                  <th>Crawl</th>
+                  <th>Tilt</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td rowspan="2" class="robot-cell">Go1<br><small style="font-weight:400;color:#888">Quadruped</small></td>
+                  <td>w/o Planning</td>
+                  <td><strong>28.37</strong></td><td>26.66</td><td>22.80</td><td>24.80</td><td>20.80</td><td>16.18</td>
+                </tr>
+                <tr>
+                  <td class="vip-row">VIP-Loco</td>
+                  <td>27.22</td>
+                  <td class="vip-row"><strong>27.85</strong></td>
+                  <td class="vip-row"><strong>23.26</strong></td>
+                  <td class="vip-row"><strong>26.33</strong></td>
+                  <td class="vip-row"><strong>22.63</strong></td>
+                  <td class="vip-row"><strong>18.78</strong></td>
+                </tr>
+                <tr>
+                  <td rowspan="2" class="robot-cell">Cassie<br><small style="font-weight:400;color:#888">Biped</small></td>
+                  <td>w/o Planning</td>
+                  <td>22.54</td><td>23.66</td><td>21.46</td><td><strong>21.34</strong></td><td><strong>18.52</strong></td><td>12.33</td>
+                </tr>
+                <tr>
+                  <td class="vip-row">VIP-Loco</td>
+                  <td class="vip-row"><strong>23.19</strong></td>
+                  <td class="vip-row"><strong>23.85</strong></td>
+                  <td class="vip-row"><strong>27.42</strong></td>
+                  <td>20.50</td>
+                  <td>17.69</td>
+                  <td class="vip-row"><strong>14.40</strong></td>
+                </tr>
+                <tr>
+                  <td rowspan="2" class="robot-cell">TronA1-W<br><small style="font-weight:400;color:#888">Wheeled Biped</small></td>
+                  <td>w/o Planning</td>
+                  <td>33.47</td><td>31.32</td><td>29.39</td><td><strong>31.19</strong></td><td>27.55</td><td>21.82</td>
+                </tr>
+                <tr>
+                  <td class="vip-row">VIP-Loco</td>
+                  <td class="vip-row"><strong>38.29</strong></td>
+                  <td class="vip-row"><strong>34.05</strong></td>
+                  <td class="vip-row"><strong>32.87</strong></td>
+                  <td>30.22</td>
+                  <td class="vip-row"><strong>29.27</strong></td>
+                  <td class="vip-row"><strong>24.03</strong></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="fig-caption">Bold = best per terrain per robot. Averaged over 5 seeds, 5k iterations.</p>
+        </div>
+      </div>
+
+      <!-- CoM rollouts -->
+      <div class="columns is-centered" style="margin-top:2.5em;">
+        <div class="column is-four-fifths">
+          <h3 class="title is-5">Qualitative Rollouts — CoM Prediction Accuracy</h3>
+          <div class="content has-text-justified">
+            <p>
+              MPC-predicted CoM height (red) vs. actual tracked profiles (black) for Climb and Crawl tasks
+              across all three morphologies. Close alignment confirms that VIP-Loco's learned dynamics model
+              provides accurate predictions for receding-horizon planning.
+            </p>
+          </div>
+          <!-- Replace with your Fig. 5 -->
+          <div class="img-placeholder" style="min-height:260px;">
+            Replace with CoM rollout figure (Fig. 5)
+          </div>
+          <p class="fig-caption">
+            Predicted vs. actual CoM height for (a) Go1, (b) Cassie, and (c) TronA1-W on Climb and Crawl.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ── CITATION ── -->
+<section class="section" id="BibTeX">
+  <div class="container is-max-desktop content">
+    <h2 class="title is-5">BibTeX</h2>
+    <pre><code>@article{viploco2025,
+  title   = {VIP-Loco: A Visually Guided Infinite Horizon Planning
+             Framework for Legged Locomotion},
+  author  = {Anonymous Authors},
+  journal = {Under Review},
+  year    = {2025}
+}</code></pre>
+  </div>
+</section>
+
+
+<!-- ── FOOTER ── -->
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <p>
+        Website template adapted from
+        <a href="https://github.com/StochLab/PIP-Loco">PIP-Loco</a> /
+        <a href="https://nerfies.github.io">Nerfies</a>.
+      </p>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
