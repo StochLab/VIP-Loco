@@ -82,6 +82,18 @@
 </head>
 <body>
 
+
+<section class="hero">
+  <div class="hero-body">
+    <div class="container is-max-desktop">
+      <img src="final_logo.png" width="20%" alt="Stoch Lab Logo"/>
+      <img src="iisc_logo.png" width="11%" alt="IISc Logo" align="right"/>
+      <div class="columns is-centered"></div>
+    </div>
+  </div>
+</section>
+
+
 <!-- ── TITLE ── -->
 <section class="hero">
   <div class="hero-body">
@@ -94,11 +106,11 @@
           </h1>
 
           <div class="is-size-5 publication-authors">
-            <span class="author-block">Anonymous Authors</span>
+            <span class="author-block">Aditya Shirwatkar · Satyam Gupta · Shishir Kolathaya</span>
           </div>
 
           <div class="is-size-6 publication-authors" style="margin-top:0.4em; color:#888;">
-            <span>Under Review · 2025</span>
+            <span>Preprint Under Review</span>
           </div>
 
           <div class="column has-text-centered" style="margin-top:1em;">
@@ -112,21 +124,7 @@
               </span>
 
               <span class="link-block">
-                <a href="#" class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon"><i class="fas fa-file-pdf"></i></span>
-                  <span>Paper</span>
-                </a>
-              </span>
-
-              <span class="link-block">
-                <a href="#" class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon"><i class="fab fa-youtube"></i></span>
-                  <span>Video</span>
-                </a>
-              </span>
-
-              <span class="link-block">
-                <a href="#" class="external-link button is-normal is-rounded is-dark">
+                <a href="https://github.com/StochLab/VIP-Loco" class="external-link button is-normal is-rounded is-dark">
                   <span class="icon"><i class="fab fa-github"></i></span>
                   <span>Code</span>
                 </a>
@@ -135,17 +133,22 @@
             </div>
           </div>
 
-          <!-- Teaser — replace with your GIFs -->
-          <div class="columns is-centered" style="margin-top:1.5em;">
+            <!-- Teaser Video Embed -->
+            <div class="columns is-centered" style="margin-top:1.5em;">
             <div class="column">
-              <div class="img-placeholder" style="min-height:180px;">
-                Replace with teaser GIFs: Go1 · Cassie · TronA1-W
+              <div style="position:relative; width:100%; padding-bottom:56.25%; height:0; overflow:hidden; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+              <video controls
+                  title="VIP-Loco Teaser"
+                  style="position:absolute; top:0; left:0; width:100%; height:100%; border-radius:8px;">
+                <source src="Vip-Loco.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+              </video>
               </div>
               <p class="fig-caption">
-                VIP-Loco evaluated across three morphologies: Unitree Go1 (quadruped), Cassie (biped), TronA1-W (wheeled biped).
+              VIP-Loco evaluated across three morphologies: Unitree Go1 (quadruped), Cassie (biped), TronA1-W (wheeled biped).
               </p>
             </div>
-          </div>
+            </div>
 
         </div>
       </div>
@@ -191,27 +194,8 @@
 </section>
 
 
-<!-- ── VIDEO ── -->
-<section class="hero">
-  <div class="hero-body">
-    <div class="container is-max-desktop">
-      <div class="columns is-centered has-text-centered">
-        <div class="column">
-          <h2 class="title is-3">Video</h2>
-          <!-- Replace with: -->
-          <!-- <iframe width="100%" style="aspect-ratio:16/9" src="https://www.youtube.com/embed/VIDEO_ID" frameborder="0" allowfullscreen></iframe> -->
-          <div class="video-placeholder">
-            Video coming soon — replace with YouTube embed
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-
 <!-- ── FRAMEWORK ── -->
-<section class="hero is-light">
+<section class="hero">
   <div class="hero-body">
     <div class="container is-max-desktop">
 
@@ -224,9 +208,13 @@
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
           <!-- Replace src with your Fig. 2 -->
-          <div class="img-placeholder" style="min-height:300px;">
-            Replace with framework figure (Fig. 2)
-          </div>
+            <div class="columns is-centered">
+            <div class="column is-four-fifths">
+              <figure style="display: flex; justify-content: center;">
+              <img src="Training.png" alt="VIP-Loco Training Framework" style="width:100%; max-width:800px; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+              </figure>
+            </div>
+            </div>
           <p class="fig-caption">
             <strong>VIP-Loco training framework.</strong>
             The internal model (GRU + CNN-MLP depth encoder + variational latent state) is trained via
@@ -255,8 +243,7 @@
               We adopt a <strong>variational</strong> latent objective rather than a consistency-based one
               (as in TD-MPC). The privileged critic's scan-dot inputs capture height information for open terrains
               but cannot represent lateral geometry constraints such as wall clearances. The variational objective
-              instead regularizes the encoder toward the learned dynamics prior, producing representations better
-              suited to visually demanding tasks such as crawl and tilt.
+              instead produces representations better suited to visually demanding tasks such as crawl and tilt.
             </p>
           </div>
         </div>
@@ -268,7 +255,7 @@
 
 
 <!-- ── DEPLOYMENT ── -->
-<section class="hero">
+<section class="hero is-light">
   <div class="hero-body">
     <div class="container is-max-desktop">
 
@@ -280,10 +267,20 @@
 
       <div class="columns is-centered has-text-centered">
         <div class="column is-four-fifths">
-          <!-- Replace with your algorithm figures -->
-          <div class="img-placeholder" style="min-height:260px;">
-            Replace with Algorithm 1 + Algorithm 2 figure
-          </div>
+            <div class="columns is-vcentered">
+            <div class="column">
+              <figure>
+              <img src="Algo1.png" alt="Algorithm 1: Imagination Augmentation" style="width:100%; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+              <figcaption class="fig-caption">Algorithm 1: Imagination Augmentation</figcaption>
+              </figure>
+            </div>
+            <div class="column">
+              <figure>
+              <img src="Algo2.png" alt="Algorithm 2: Infinite-Horizon MPC" style="width:100%; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+              <figcaption class="fig-caption">Algorithm 2: Infinite-Horizon MPC</figcaption>
+              </figure>
+            </div>
+            </div>
           <p class="fig-caption">
             <em>Left (Alg. 1):</em> Imagination Augmentation rolls out future kinodynamic CoM states in
             latent space using the internal model.
@@ -309,6 +306,36 @@
         </div>
       </div>
 
+      <!-- Training comparison -->
+      <div class="columns is-centered">
+        <div class="column is-four-fifths">
+          <h3 class="title is-5">Training Comparison (Go1)</h3>
+          <div class="content has-text-justified">
+            <p>
+              We compare three visually-guided methods during training on the Go1 quadruped over 6000
+              iterations, tracking average episodic return (top) and mastered terrain level (bottom),
+              averaged over 5 seeds.
+            </p>
+          </div>
+          <div class="columns is-centered">
+            <div class="column is-half">
+              <figure>
+                <img src="ablation_plot.png" alt="Training Comparison (Ablation Study)" style="width:100%; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+              </figure>
+            </div>
+          </div>
+          <p class="fig-caption">
+            <strong>VIP-Loco (Variational)</strong> achieves the highest and most stable returns,
+            steadily mastering harder terrains (levels &ge;6). <strong>WMP</strong> performs
+            competitively but asymptotically regresses to easier terrains to maintain higher reward.
+            <strong>VIP-Loco (Consistency)</strong> converges earlier and stagnates at lower levels,
+            highlighting the benefit of the variational objective for visually demanding tasks such
+            as crawl and tilt, where the privileged critic's scan-dot inputs provide an insufficient
+            terrain description.
+          </p>
+        </div>
+      </div>
+
       <!-- Per-terrain comparison -->
       <div class="columns is-centered">
         <div class="column is-four-fifths">
@@ -319,11 +346,14 @@
               HIM-Loco and PIP-Loco represent [RL + MPC] without vision; WMP represents [RL + Vision] without
               planning; VIP-Loco (Variational) is our full method.
             </p>
-          </div>
-          <!-- Replace with your Fig. 4 -->
-          <div class="img-placeholder" style="min-height:280px;">
-            Replace with deployment comparison figure (Fig. 4)
-          </div>
+            </div>
+            <div class="columns is-centered">
+            <div class="column is-three-quarters">
+              <figure>
+              <img src="comparison_plot.png" alt="Deployment Performance Comparison (Go1)" style="width:100%; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+              </figure>
+            </div>
+            </div>
           <p class="fig-caption">
             Success rate (top) and average return (bottom) across five terrain types for the Go1 quadruped,
             over 5 seeds. VIP-Loco (Variational) maintains &gt;90% success on stairs at maximum difficulty
@@ -339,7 +369,7 @@
           <div class="content has-text-justified">
             <p>
               Average episodic return after 5k iterations (5 seeds). Planning gains are concentrated at
-              high difficulty levels (5–8) where baseline methods saturate or fail. TronA1-W shows the
+              high difficulty levels (5-8) where baseline methods saturate or fail. TronA1-W shows the
               largest and most consistent gains (+2.33 avg. return) due to additional non-holonomic constraints.
             </p>
           </div>
@@ -419,10 +449,28 @@
               provides accurate predictions for receding-horizon planning.
             </p>
           </div>
-          <!-- Replace with your Fig. 5 -->
-          <div class="img-placeholder" style="min-height:260px;">
-            Replace with CoM rollout figure (Fig. 5)
+            
+          <div class="columns is-multiline is-centered">
+            <div class="column is-full">
+              <figure>
+                <img src="mpc_go1.png" alt="CoM Rollout: Go1" style="width:100%; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+                <figcaption class="fig-caption">(a) Go1 (Quadruped)</figcaption>
+              </figure>
+            </div>
+            <div class="column is-full">
+              <figure>
+                <img src="mpc_cassie.png" alt="CoM Rollout: Cassie" style="width:100%; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+                <figcaption class="fig-caption">(b) Cassie (Biped)</figcaption>
+              </figure>
+            </div>
+            <div class="column is-full">
+              <figure>
+                <img src="mpc_trona1_w.png" alt="CoM Rollout: TronA1-W" style="width:100%; border-radius:8px; box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+                <figcaption class="fig-caption">(c) TronA1-W (Wheeled Biped)</figcaption>
+              </figure>
+            </div>
           </div>
+          
           <p class="fig-caption">
             Predicted vs. actual CoM height for (a) Go1, (b) Cassie, and (c) TronA1-W on Climb and Crawl.
           </p>
@@ -441,7 +489,7 @@
     <pre><code>@article{viploco2025,
   title   = {VIP-Loco: A Visually Guided Infinite Horizon Planning
              Framework for Legged Locomotion},
-  author  = {Anonymous Authors},
+  author  = {Aditya Shirwatkar and Satyam Gupta and Shishir Kolathaya},
   journal = {Under Review},
   year    = {2025}
 }</code></pre>
