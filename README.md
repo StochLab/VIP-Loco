@@ -4,7 +4,7 @@
 
 ### Installation
 
-This repository is a modified version of [WMP-Loco](https://wmp-loco.github.io/). Modifications roughly include our method, the **Warp** backend for fast depth processing, **JAX** for planning, and additional robot platforms.
+This repository is a modified version of [WMP-Loco](https://wmp-loco.github.io/). Modifications roughly include [our method](https://www.stochlab.com/VIP-Loco/), the **Warp** backend for fast depth processing, **JAX** for planning, and additional robot platforms.
 
 #### Prerequisites
 
