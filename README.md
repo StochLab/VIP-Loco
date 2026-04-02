@@ -41,7 +41,14 @@ Download [IsaacGym Preview 4](https://developer.nvidia.com/isaac-gym) and instal
 
 ```bash
 cd <isaacgym_path>/python
+pip install "setuptools<67"
 pip install -e .
+```
+
+If you get `ImportError: libpython3.8.so.1.0: cannot open shared object file`, run this before importing isaacgym:
+
+```bash
+export LD_LIBRARY_PATH=/path/to/miniconda3/envs/viploco/lib:$LD_LIBRARY_PATH
 ```
 
 ---
